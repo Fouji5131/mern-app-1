@@ -11,6 +11,8 @@ const HttpError = require("./models/http-error");
 
 const app = express();
 
+const PORT = 5000;
+
 const dbUrl = `mongodb+srv://Abdullah:Abdullah5131@cluster0.8zz16qs.mongodb.net/mern?retryWrites=true&w=majority`;
 
 app.use(bodyParser.json());
@@ -52,7 +54,7 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(dbUrl)
   .then(() => {
-    app.listen(5000);
+    app.listen(PORT);
   })
   .catch((err) => {
     console.log(err);
