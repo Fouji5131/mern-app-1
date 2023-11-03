@@ -1,12 +1,12 @@
-// export const variable = {
-//   VERCEL_BACKEND: "https://mern-app-1-backend.vercel.app",
-//   LOCALHOST_BACKEND: "http://localhost:5000",
-// };
-
 export const variable = {
-  // VERCEL_BACKEND: "https://mern-app-1-backend.vercel.app",
-  LOCALHOST_BACKEND: "https://mern-app-1-backend.vercel.app",
+  VERCEL_BACKEND: "https://mern-app-1-backend.vercel.app",
+  LOCALHOST_BACKEND: "http://localhost:5000",
 };
+
+// export const variable = {
+//   // VERCEL_BACKEND: "https://mern-app-1-backend.vercel.app",
+//   LOCALHOST_BACKEND: "https://mern-app-1-backend.vercel.app",
+// };
 
 // module.exports = variable;
 
