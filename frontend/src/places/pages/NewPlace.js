@@ -14,6 +14,9 @@ import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
 import "./PlaceForm.css";
+import { variable } from "../../shared/util/variables";
+
+const localHost = variable.LOCALHOST_BACKEND;
 
 const NewPlace = () => {
   const auth = useContext(AuthContext);
@@ -50,14 +53,9 @@ const NewPlace = () => {
       formData.append("description", formState.inputs.description.value);
       formData.append("address", formState.inputs.address.value);
       formData.append("image", formState.inputs.image.value);
-      await sendRequest(
-        "https://mern-app-1-backend.vercel.app/api/places",
-        "POST",
-        formData,
-        {
-          Authorization: "Bearer " + auth.token,
-        }
-      );
+      await sendRequest(`${localHost}/api/places`, "POST", formData, {
+        Authorization: "Bearer " + auth.token,
+      });
       history.push("/");
     } catch (err) {}
   };

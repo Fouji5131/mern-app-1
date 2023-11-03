@@ -5,6 +5,9 @@ import PlaceList from "../components/PlaceList";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import { variable } from "../../shared/util/variables";
+
+const localHost = variable.LOCALHOST_BACKEND;
 
 const UserPlaces = () => {
   const [loadedPlaces, setLoadedPlaces] = useState();
@@ -16,7 +19,7 @@ const UserPlaces = () => {
     const fetchPlaces = async () => {
       try {
         const responseData = await sendRequest(
-          `https://mern-app-1-backend.vercel.app/api/places/user/${userId}`
+          `${localHost}/api/places/user/${userId}`
         );
         setLoadedPlaces(responseData.places);
       } catch (err) {}

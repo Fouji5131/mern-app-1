@@ -14,6 +14,9 @@ import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
 import "./PlaceForm.css";
+import { variable } from "../../shared/util/variables";
+
+const localHost = variable.LOCALHOST_BACKEND;
 
 const UpdatePlace = () => {
   const auth = useContext(AuthContext);
@@ -40,7 +43,7 @@ const UpdatePlace = () => {
     const fetchPlace = async () => {
       try {
         const responseData = await sendRequest(
-          `https://mern-app-1-backend.vercel.app/api/places/${placeId}`
+          `${localHost}/api/places/${placeId}`
         );
         setLoadedPlace(responseData.place);
         setFormData(
@@ -65,7 +68,7 @@ const UpdatePlace = () => {
     event.preventDefault();
     try {
       await sendRequest(
-        `https://mern-app-1-backend.vercel.app/api/places/${placeId}`,
+        `${localHost}/api/places/${placeId}`,
         "PATCH",
         JSON.stringify({
           title: formState.inputs.title.value,

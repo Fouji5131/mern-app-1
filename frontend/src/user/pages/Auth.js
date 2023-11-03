@@ -16,6 +16,10 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
 import "./Auth.css";
 
+import { variable } from "../../shared/util/variables";
+
+const localHost = variable.LOCALHOST_BACKEND;
+
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -70,7 +74,7 @@ const Auth = () => {
     if (isLoginMode) {
       try {
         const responseData = await sendRequest(
-          "https://mern-app-1-backend.vercel.app/api/users/login",
+          `${localHost}/api/users/login`,
           "POST",
           JSON.stringify({
             email: formState.inputs.email.value,
@@ -90,7 +94,7 @@ const Auth = () => {
         formData.append("password", formState.inputs.password.value);
         formData.append("image", formState.inputs.image.value);
         const responseData = await sendRequest(
-          "https://mern-app-1-backend.vercel.app/api/users/signup",
+          `${localHost}/api/users/signup`,
           "POST",
           formData
         );

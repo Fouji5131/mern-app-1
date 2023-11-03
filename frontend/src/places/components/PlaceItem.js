@@ -9,6 +9,9 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import "./PlaceItem.css";
+import { variable } from "../../shared/util/variables";
+
+const localHost = variable.LOCALHOST_BACKEND;
 
 const PlaceItem = (props) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -31,14 +34,9 @@ const PlaceItem = (props) => {
   const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
     try {
-      await sendRequest(
-        `https://mern-app-1-backend.vercel.app/api/places/${props.id}`,
-        "DELETE",
-        null,
-        {
-          Authorization: "Bearer " + auth.token,
-        }
-      );
+      await sendRequest(`${localHost}/api/places/${props.id}`, "DELETE", null, {
+        Authorization: "Bearer " + auth.token,
+      });
       props.onDelete(props.id);
     } catch (err) {}
   };
@@ -83,10 +81,7 @@ const PlaceItem = (props) => {
         <Card className="place-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image">
-            <img
-              src={`https://mern-app-1-backend.vercel.app/${props.image}`}
-              alt={props.title}
-            />
+            <img src={`${localHost}/${props.image}`} alt={props.title} />
           </div>
           <div className="place-item__info">
             <h2>{props.title}</h2>
